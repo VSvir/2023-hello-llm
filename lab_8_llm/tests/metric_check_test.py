@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from lab_7_llm.tests.metric_check_test import run_metrics_check
+from lab_8_llm.main import TaskEvaluator
 from lab_8_llm.start import main
 
 
@@ -22,4 +23,4 @@ class MetricCheckTest(unittest.TestCase):
         """
         Ideal tokenize scenario
         """
-        self.assertIsNone(run_metrics_check(Path(__file__).parent.parent, main))
+        self.assertIsNone(run_metrics_check(Path(__file__).parent.parent, main, TaskEvaluator))

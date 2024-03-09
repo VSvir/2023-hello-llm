@@ -3,7 +3,7 @@ Checks that E2E scenario allows to get desired metrics values
 """
 import unittest
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Type
 
 import pytest
 
@@ -17,12 +17,13 @@ from lab_7_llm.start import main
 def run_metrics_check(
         lab_path: Path,
         pipeline_main: Callable,
-        task_evaluator: TaskEvaluator = None
+        task_evaluator: Type[TaskEvaluator] = TaskEvaluator
 ) -> None:
     """
     Evaluate metrics from a lab.
 
     Arguments:
+         task_evaluator: task for evaluation
          lab_path (Path): path to lab
          pipeline_main (Callable): main from this lab
     """
@@ -32,11 +33,10 @@ def run_metrics_check(
     settings = LabSettings(lab_path / 'settings.json')
 
     predictions_path = lab_path / 'dist' / 'predictions.csv'
-    if task_evaluator is None:
-        task_evaluator = TaskEvaluator(
-            data_path=predictions_path,
-            metrics=settings.parameters.metrics
-        )
+    task_evaluator = task_evaluator(
+        data_path=predictions_path,
+        metrics=settings.parameters.metrics
+    )
     result = task_evaluator.run()
 
     references = ReferenceScores()

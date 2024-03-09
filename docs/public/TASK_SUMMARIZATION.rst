@@ -98,7 +98,7 @@ Datasets
    2. **Rows**: 30454
    3. **Preprocess**:
 
-      1. Select ``train`` subset.
+      1. Select ``train`` split.
       2. Drop columns ``title``, ``date``, ``url``.
       3. Rename column ``article_content`` to ``source``.
       4. Rename column ``summary`` to ``target``.
@@ -120,7 +120,7 @@ Datasets
    2. **Rows**: 95
    3. **Preprocess**:
 
-      1. Select ``train`` subset.
+      1. Select ``train`` split.
       2. Rename column ``Reviews`` to ``source``.
       3. Rename column ``Summary`` to ``target``.
       4. Reset indexes.

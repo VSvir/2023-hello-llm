@@ -97,9 +97,10 @@ Datasets
    2. **Rows**: 25000
    3. **Preprocess**:
 
-      1. Rename column ``labels`` to ``target``.
-      2. Rename column ``text`` to ``source``.
-      3. Reset indexes.
+      1. Select ``test`` split.
+      2. Rename column ``labels`` to ``target``.
+      3. Rename column ``text`` to ``source``.
+      4. Reset indexes.
 
 6. `dair-ai/emotion <https://huggingface.co/datasets/dair-ai/emotion>`__
 
@@ -108,9 +109,10 @@ Datasets
    3. **Preprocess**:
 
       1. Select ``split`` subset.
-      2. Rename column ``label`` to ``target``.
-      3. Rename column ``text`` to ``source``.
-      4. Reset indexes.
+      2. Select ``validation`` split.
+      3. Rename column ``label`` to ``target``.
+      4. Rename column ``text`` to ``source``.
+      5. Reset indexes.
 
 7. `blinoff/kinopoisk <https://huggingface.co/datasets/blinoff/kinopoisk>`__
 
@@ -118,12 +120,13 @@ Datasets
    2. **Rows**: 36591
    3. **Preprocess**:
 
-      1. Leave only ``content`` and ``grade3`` columns.
-      2. Rename column ``grade3`` to ``target``.
-      3. Rename column ``content`` to ``source``.
-      4. Delete empty rows in dataset.
-      5. Map ``target`` with class labels.
-      6. Reset indexes.
+      1. Select ``validation`` split.
+      2. Leave only ``content`` and ``grade3`` columns.
+      3. Rename column ``grade3`` to ``target``.
+      4. Rename column ``content`` to ``source``.
+      5. Delete empty rows in dataset.
+      6. Map ``target`` with class labels.
+      7. Reset indexes.
 
 8. `blinoff/healthcare_facilities_reviews <https://huggingface.co/datasets/blinoff/healthcare_facilities_reviews>`__
 
@@ -131,10 +134,11 @@ Datasets
    2. **Rows**: 70597
    3. **Preprocess**:
 
-      1. Leave only ``content`` and ``sentiment`` columns.
-      2. Rename column ``sentiment`` to ``target``.
-      3. Rename column ``content`` to ``source``.
-      4. Map ``target`` with class labels.
+      1. Select ``validation`` split.
+      2. Leave only ``content`` and ``sentiment`` columns.
+      3. Rename column ``sentiment`` to ``target``.
+      4. Rename column ``content`` to ``source``.
+      5. Map ``target`` with class labels.
 
 9. `tatiana-merz/cyrillic_turkic_langs <https://huggingface.co/datasets/tatiana-merz/cyrillic_turkic_langs>`__
 
@@ -142,9 +146,10 @@ Datasets
    2. **Rows**: 9000
    3. **Preprocess**:
 
-      1. Rename column ``label`` to ``target``.
-      2. Rename column ``text`` to ``source``.
-      3. Map ``target`` with class labels.
+      1. Select ``validation`` split.
+      2. Rename column ``label`` to ``target``.
+      3. Rename column ``text`` to ``source``.
+      4. Map ``target`` with class labels.
 
 10. `s-nlp/ru_paradetox_toxicity <https://huggingface.co/datasets/s-nlp/ru_paradetox_toxicity>`__
 
@@ -164,8 +169,9 @@ Datasets
    2. **Rows**: 163187
    3. **Preprocess**:
 
-      1. Rename column ``toxic`` to ``target``.
-      2. Rename column ``text`` to ``source``.
+      1. Select ``train`` split.
+      2. Rename column ``toxic`` to ``target``.
+      3. Rename column ``text`` to ``source``.
 
 12. `s-nlp/ru_non_detoxified <https://huggingface.co/datasets/s-nlp/ru_non_detoxified>`__
 
@@ -187,11 +193,12 @@ Datasets
    2. **Rows**: 6490
    3. **Preprocess**:
 
-      1. Drop column ``id``, ``severe_toxic``, ``obscene``,
+      1. Select ``validation`` split.
+      2. Drop column ``id``, ``severe_toxic``, ``obscene``,
          ``threat``, ``insult``, ``identity_hate``.
-      2. Rename column ``toxic`` to ``target``.
-      3. Rename column ``comment_text`` to ``source``.
-      4. Reset indexes.
+      3. Rename column ``toxic`` to ``target``.
+      4. Rename column ``comment_text`` to ``source``.
+      5. Reset indexes.
 
 14. `s-nlp/en_paradetox_toxicity <https://huggingface.co/datasets/s-nlp/en_paradetox_toxicity>`__
 
@@ -199,7 +206,7 @@ Datasets
    2. **Rows**: 26507
    3. **Preprocess**:
 
-      1. Select ``train`` subset.
+      1. Select ``train`` split.
       2. Rename column ``toxic`` to ``target``.
       3. Rename column ``comment`` to ``source``.
       4. Reset indexes.

@@ -77,17 +77,26 @@ def cleanup_code(source_code_path: Path) -> str:
 
     if source_code_path.name not in ('start.py', 'service.py'):
         accepted_modules['pathlib'] = ['Path']
+        accepted_modules['torch'] = ['']
+        accepted_modules['pandas'] = ['DataFrame']
         accepted_modules['core_utils.llm.llm_pipeline'] = ['AbstractLLMPipeline']
         accepted_modules['core_utils.llm.metrics'] = ['Metrics']
         accepted_modules['core_utils.llm.raw_data_importer'] = ['AbstractRawDataImporter']
         accepted_modules['core_utils.llm.raw_data_preprocessor'] = ['AbstractRawDataPreprocessor']
         accepted_modules['core_utils.llm.task_evaluator'] = ['AbstractTaskEvaluator']
 
-    if source_code_path.name != 'start.py':
-        accepted_modules['pathlib'] = ['Path']
+    if 'reference_lab' in source_code_path.parent.name:
+        accepted_modules['config.lab_settings'] = ['InferenceParams']
 
-    if source_code_path.name == 'start.py':
+    if source_code_path.name == 'start.py' and 'llm' in source_code_path.parent.name:
         accepted_modules.pop('typing')
+
+    if source_code_path.name == 'main.py' and 'reference_lab' in source_code_path.parent.name:
+        accepted_modules.pop('pandas')
+
+    if source_code_path.name == 'service.py':
+        accepted_modules['fastapi'] = ['FastAPI']
+        accepted_modules['lab_7_llm.main'] = ['LLMPipeline']
 
     new_decl: list[stmt] = []
 
@@ -96,9 +105,14 @@ def cleanup_code(source_code_path: Path) -> str:
             data.body.insert(data_2.body.index(decl_2), decl_2)
 
     for decl in data.body:
-        if isinstance(decl, ast.FunctionDef) and (decl.name == 'get_params' or
-                                                  'get_result' in decl.name):
+        if isinstance(decl, ast.AsyncFunctionDef) or \
+                isinstance(decl, ast.ClassDef) and \
+                decl.name == 'Query':
             decl = []  # type: ignore
+
+        if source_code_path.name == 'service.py' and \
+                isinstance(decl, ast.Assign):
+            decl = ast.parse("app, pipeline = None, None")  # type: ignore
 
         if isinstance(decl, (ast.Import, ast.ImportFrom)):
             if (module_name := getattr(decl, 'module', None)) is None:
